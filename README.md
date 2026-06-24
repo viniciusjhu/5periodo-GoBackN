@@ -2,6 +2,31 @@
 
 Implementação de transferência confiável de arquivos sobre UDP usando o protocolo Go-Back-N, desenvolvida em Java 21 com Maven.
 
+## Pré-requisitos
+
+- **Java 21** (ou superior) instalado
+- Variável de ambiente `JAVA_HOME` apontando para a pasta do JDK (sem barra no final)
+
+Para verificar se está configurado corretamente:
+
+```bash
+java -version
+echo %JAVA_HOME%   # Windows CMD
+echo $JAVA_HOME    # Linux/Mac
+```
+
+Se o `JAVA_HOME` não estiver definido, defina-o antes de compilar:
+
+**Windows (PowerShell, persistente):**
+```powershell
+[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot", "User")
+```
+
+**Linux/Mac:**
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+```
+
 ## Como funciona
 
 O UDP envia datagramas sem garantias. Este projeto implementa a confiabilidade manualmente:
