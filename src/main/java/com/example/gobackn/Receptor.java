@@ -29,6 +29,10 @@ public class Receptor {
         byte[] bufferRecepcao = new byte[ConfigProtocolo.CABECALHO_TAMANHO + ConfigProtocolo.TAMANHO_PAYLOAD];
         Random random = new Random();
 
+        // Garante que as pastas de arquivos existem desde o inicio
+        new File("arqsEmissor").mkdirs();
+        new File("arqsReceptor").mkdirs();
+
         try (DatagramSocket socket = new DatagramSocket(porta)) {
             System.out.println("Receptor escutando na porta " + porta);
 
@@ -42,7 +46,6 @@ public class Receptor {
             long tamanhoArquivo = Long.parseLong(parametros[1]);
             String caminhoDestino = parametros[2];
             // Salva o arquivo na pasta arqsReceptor/
-            new File("arqsReceptor").mkdirs();
             caminhoDestino = new File("arqsReceptor", caminhoDestino).getPath();
 
             System.out.println("Handshake recebido:");

@@ -66,7 +66,8 @@ public class Emissor {
             System.exit(1);
         }
 
-        // Le o arquivo da pasta arqsEmissor/
+        // Garante que a pasta arqsEmissor/ existe e le o arquivo de la
+        new File("arqsEmissor").mkdirs();
         String caminhoOrigem = new File("arqsEmissor", args[0]).getPath();
         String destino = args[1];
         int sep = destino.indexOf(':');
