@@ -20,15 +20,21 @@ O UDP envia datagramas sem garantias. Este projeto implementa a confiabilidade m
 ## Estrutura do projeto
 
 ```
-src/main/java/com/example/gobackn/
-├── Emissor.java          # Emissor com threads de envio, ACKs e timer
-├── Receptor.java         # Receptor com FSM do Go-Back-N
-├── Segmento.java         # Serialização/desserialização dos datagramas
-├── TipoSegmento.java     # Constantes: DATA, ACK, HANDSHAKE, FIN
-├── ConfigProtocolo.java  # Constantes do protocolo
-├── BufferJanela.java     # Buffer circular para retransmissão
-└── HashUtil.java         # Cálculo de hash MD5 para verificação
+5periodo-GoBackN/
+├── arqsEmissor/             # Coloque aqui o arquivo a ser enviado
+├── arqsReceptor/             # O arquivo recebido aparece aqui
+├── src/main/java/com/example/gobackn/
+│   ├── Emissor.java          # Emissor com threads de envio, ACKs e timer
+│   ├── Receptor.java         # Receptor com FSM do Go-Back-N
+│   ├── Segmento.java         # Serialização/desserialização dos datagramas
+│   ├── TipoSegmento.java     # Constantes: DATA, ACK, HANDSHAKE, FIN
+│   ├── ConfigProtocolo.java  # Constantes do protocolo
+│   ├── BufferJanela.java     # Buffer circular para retransmissão
+│   └── HashUtil.java         # Cálculo de hash MD5 para verificação
+└── ...
 ```
+
+> **Importante:** O Emissor lê o arquivo de origem da pasta `arqsEmissor/` e o Receptor salva o arquivo recebido na pasta `arqsReceptor/`. Essas pastas são criadas automaticamente se não existirem.
 
 ## Formato do segmento
 
@@ -58,22 +64,18 @@ O parâmetro `5000` é a porta UDP (opcional, padrão é 5000).
 
 ### 2. Iniciar o Emissor
 
-**Windows:**
-```bash
-java -cp target/go-back-n-0.0.1-SNAPSHOT.jar com.example.gobackn.Emissor arquivo.pdf 127.0.0.1:C:\temp\arquivo_recebido.pdf 8 0.10
-```
+Coloque o arquivo a ser enviado dentro da pasta `arqsEmissor/`. O `path_destino` no comando pode ser apenas o nome do arquivo — o Receptor sempre salva na pasta `arqsReceptor/`.
 
-**Linux:**
 ```bash
-java -cp target/go-back-n-0.0.1-SNAPSHOT.jar com.example.gobackn.Emissor arquivo.pdf 127.0.0.1:/tmp/arquivo_recebido.pdf 8 0.10
+java -cp target/go-back-n-0.0.1-SNAPSHOT.jar com.example.gobackn.Emissor arquivo.pdf 127.0.0.1:recebido.pdf 8 0.10
 ```
 
 ### Argumentos do Emissor
 
 | Argumento | Descrição | Exemplo |
 |-----------|-----------|---------|
-| `arquivo_origem` | Caminho do arquivo a enviar | `foto.jpg` |
-| `IP:path_destino` | IP do receptor e caminho de destino | `127.0.0.1:C:\temp\recebido.jpg` |
+| `arquivo_origem` | Nome do arquivo dentro de `arqsEmissor/` | `foto.jpg` |
+| `IP:arquivo_destino` | IP do receptor e nome do arquivo de destino (salvo em `arqsReceptor/`) | `127.0.0.1:recebido.jpg` |
 | `tamanho_janela` | Tamanho da janela Go-Back-N | `8` |
 | `prob_perda` | Probabilidade de perda simulada (0.0 a 1.0) | `0.10` |
 

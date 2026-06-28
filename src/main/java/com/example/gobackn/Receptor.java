@@ -1,5 +1,6 @@
 package com.example.gobackn;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -40,6 +41,9 @@ public class Receptor {
             double probPerda = Double.parseDouble(parametros[0]);
             long tamanhoArquivo = Long.parseLong(parametros[1]);
             String caminhoDestino = parametros[2];
+            // Salva o arquivo na pasta arqsReceptor/
+            new File("arqsReceptor").mkdirs();
+            caminhoDestino = new File("arqsReceptor", caminhoDestino).getPath();
 
             System.out.println("Handshake recebido:");
             System.out.println("  Arquivo destino: " + caminhoDestino);

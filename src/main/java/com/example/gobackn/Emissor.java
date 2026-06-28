@@ -66,11 +66,14 @@ public class Emissor {
             System.exit(1);
         }
 
-        String caminhoOrigem = args[0];
+        // Le o arquivo da pasta arqsEmissor/
+        String caminhoOrigem = new File("arqsEmissor", args[0]).getPath();
         String destino = args[1];
         int sep = destino.indexOf(':');
         String ip = destino.substring(0, sep);
         String caminhoDestino = destino.substring(sep + 1);
+        // Envia ao receptor apenas o nome do arquivo (sem o caminho completo)
+        String arquivoDestino = new File(caminhoDestino).getName();
         int windowSize = Integer.parseInt(args[2]);
         double probPerda = Double.parseDouble(args[3]);
 
@@ -79,7 +82,7 @@ public class Emissor {
         try (DatagramSocket socket = new DatagramSocket()) {
             Emissor emissor = new Emissor(socket, InetAddress.getByName(ip),
                     ConfigProtocolo.PORTA_PADRAO, windowSize, probPerda,
-                    caminhoOrigem, caminhoDestino, tamanhoArquivo);
+                    caminhoOrigem, arquivoDestino, tamanhoArquivo);
             emissor.executar();
         }
     }

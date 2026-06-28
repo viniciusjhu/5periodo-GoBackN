@@ -37,3 +37,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Pastas de arquivos do protocolo (mantem apenas a estrutura) ###
+arqsEmissor/*
+!arqsEmissor/.gitkeep
+arqsReceptor/*
+!arqsReceptor/.gitkeep
