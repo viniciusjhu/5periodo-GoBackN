@@ -91,7 +91,7 @@ O parâmetro `5000` é a porta UDP (opcional, padrão é 5000). O Receptor vai f
 Abra **outro terminal** e execute:
 
 ```bash
-java -cp target/go-back-n-1.0.jar com.example.gobackn.Emissor arquivo.pdf 127.0.0.1:recebido.pdf 8 0.10
+java -cp target/go-back-n-1.0.jar com.example.gobackn.Emissor [arquivo_origem] [IP:arquivo_destino] [tamanho_janela] [prob_perda]
 ```
 
 #### Argumentos do Emissor
