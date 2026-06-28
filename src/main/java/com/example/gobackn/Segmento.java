@@ -20,7 +20,6 @@ public class Segmento {
     private final byte[] dados;
     private final int tamanhoDados;
 
-    /** Construtor privado - use os metodos de fabrica para criar segmentos. */
     private Segmento(TipoSegmento tipo, int numSeq, int numAck, byte[] dados, int tamanhoDados) {
         this.tipo = tipo;
         this.numSeq = numSeq;
